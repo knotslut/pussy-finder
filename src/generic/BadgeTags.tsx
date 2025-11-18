@@ -15,6 +15,7 @@ export default function BadgeTags({ asStatic, ...props }: badgeTagsProps) {
       {selectedTags.length > 0 ? (
         selectedTags.map((v) => (
           <Badge
+            key={v}
             variant={"secondary"}
             className="mx-1 transition-all hover:bg-secondary-foreground hover:text-secondary hover:cursor-pointer"
             onClick={() =>

@@ -46,7 +46,7 @@ export default function Topbar() {
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               {(Object.keys(contentTypes) as ContentT[]).map((content) => (
-                <NavigationMenuLink asChild>
+                <NavigationMenuLink key={content} asChild>
                   <a
                     className="hover:cursor-pointer w-[200px] max-w-[75vw]"
                     onClick={() => {

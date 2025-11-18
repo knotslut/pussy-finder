@@ -13,8 +13,8 @@ export default function SwipeSkeleton({
     <div {...props}>
       <Skeleton className="h-[clamp(100px,50vh,500px)] aspect-square" />
       <div className="mt-3 max-w-full flex flex-row">
-        {[...Array(3).keys()].map(() => (
-          <Skeleton className="w-[45px] h-[22px] mx-1" />
+        {[...Array(3).keys()].map((i) => (
+          <Skeleton key={i} className="w-[45px] h-[22px] mx-1" />
         ))}
       </div>
       {children}

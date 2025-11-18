@@ -40,9 +40,15 @@ export function CatDresser({ children }: { children: ReactNode }) {
     setSays(saysVal.current);
   };
 
+  const closeModal = () => {
+    setActive(false);
+    setSays("");
+    saysVal.current = "";
+  };
+
   useEffect(() => {
     const key_ev = (ev: KeyboardEvent) => {
-      if (ev.key == "Escape") setActive(false);
+      if (ev.key == "Escape") closeModal();
     };
 
     document.addEventListener("keyup", key_ev);
@@ -55,6 +61,8 @@ export function CatDresser({ children }: { children: ReactNode }) {
       value={{
         openDresser: (schema) => {
           setCatSchema(schema);
+          setSays("");
+          saysVal.current = "";
           setActive(true);
         },
       }}
@@ -63,7 +71,7 @@ export function CatDresser({ children }: { children: ReactNode }) {
       {active && (
         <div
           className="fixed top-0 left-0 w-screen h-screen backdrop-blur-lg z-15"
-          onClick={() => setActive(false)}
+          onClick={closeModal}
         />
       )}
       <div
@@ -93,7 +101,6 @@ export function CatDresser({ children }: { children: ReactNode }) {
                     src={getExactCatURL({
                       id: catSchema.id,
                       says,
-                      type: "medium",
                     })}
                   />
                 </Suspense>
@@ -103,6 +110,7 @@ export function CatDresser({ children }: { children: ReactNode }) {
               {catSchema &&
                 catSchema.tags.map((tag) => (
                   <ExtraTag
+                    key={tag}
                     tag={tag}
                     className="mx-1"
                     onClick={() => {
@@ -114,9 +122,10 @@ export function CatDresser({ children }: { children: ReactNode }) {
                 ))}
             </div>
             <Input
+              key={catSchema?.id}
               className="my-2"
               onChange={(ev) => (saysVal.current = ev.target.value)}
-              defaultValue={saysVal.current}
+              defaultValue=""
               placeholder="Meow meow"
               onKeyDown={(ev) => {
                 if (ev.key == "Enter") setActiveSays();
@@ -132,7 +141,7 @@ export function CatDresser({ children }: { children: ReactNode }) {
               </Button>
               <Button
                 className="ml-auto mr-2 my-3"
-                onClick={() => setActive(false)}
+                onClick={closeModal}
                 variant={"secondary"}
               >
                 Cancel

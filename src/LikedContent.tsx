@@ -25,7 +25,7 @@ export default function LikedContent(props: LikedContentProps) {
       <div className="flex gap-5 max-sm:gap-3 flex-wrap w-full min-h-[60vh] justify-evenly">
         {likeFiltered.length > 0 &&
           likeFiltered.map((cat) => (
-            <div className="">
+            <div key={cat.id} className="">
               <div className="relative w-fit">
                 <CatCard
                   schema={cat}
@@ -49,6 +49,7 @@ export default function LikedContent(props: LikedContentProps) {
                   <div className="mt-2">
                     {cat.tags.map((tag) => (
                       <ExtraTag
+                        key={tag}
                         tag={tag}
                         onClick={() => {
                           setSelectedTags((tags) =>

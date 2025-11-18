@@ -68,6 +68,7 @@ export default function CatContent(
           <div className="flex flex-wrap justify-between gap-y-2">
             {content.map((val) => (
               <ErrorBoundary
+                key={val.id}
                 fallback={
                   <div className="max-sm:w-[150px] w-[200px] aspect-square flex">
                     <div className="w-fit h-fit m-auto text-center items-center">
